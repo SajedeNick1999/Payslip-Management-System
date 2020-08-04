@@ -1,11 +1,11 @@
 from django.db import models
-from .models import Company
+from CompanyManagement.models import Company
 
 class Employee(models.Model):
 	ID 			  = models.UUIDField(primary_key=True,)
 	Name  		  = models.CharField(max_length=100)
 	LastName 	  = models.CharField(max_length=100)
-	CompanyID 	  = models.ForeignKey('Company',on_delete=models.CASCADE,)
+	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,)
 	PersonnelCode = models.DecimalField(max_digits=10, decimal_places=0,)
 	AccountNumber = models.DecimalField(max_digits=10, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
