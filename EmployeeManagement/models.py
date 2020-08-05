@@ -9,10 +9,10 @@ class Employee(models.Model):
 	LastName 	  = models.CharField(max_length=100)
 	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
 	PersonnelCode = models.DecimalField(max_digits=10, decimal_places=0,)
-	AccountNumber = models.DecimalField(max_digits=10, decimal_places=0,)
+	AccountNumber = models.DecimalField(max_digits=16, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
 	EmailAddress  = models.EmailField(max_length=254)
-	Token 		  = models.CharField(max_length=16)
+	Token 		  = models.CharField(max_length=16,blank=True, null=True)
 
 	def Employee_SetToken(self):
 		self.Token = secrets.token_hex(16)
