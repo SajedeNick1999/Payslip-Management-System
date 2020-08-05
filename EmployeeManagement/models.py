@@ -12,7 +12,7 @@ class Employee(models.Model):
 	AccountNumber = models.DecimalField(max_digits=10, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
 	EmailAddress  = models.EmailField(max_length=254)
-	Token 		  = models.CharField(max_length=16)
+	Token 		  = models.CharField(max_length=100)
 
 	def Employee_SetToken(self):
 		self.Token = secrets.token_hex(16)

@@ -5,15 +5,15 @@ from EmployeeManagement.models import Employee
 class Company(models.Model):
 	ID 			= models.UUIDField(primary_key=True,)
 	Name 		= models.CharField(max_length=100,)
-	ManagerID	= models.ForeignKey('ManagerManagement.Manager',on_delete=models.CASCADE,default=0)
 	FormID 		= models.ForeignKey('FormManagement.Form',on_delete=models.CASCADE,default=0)
 	MaxEmployee = models.DecimalField(max_digits=10, decimal_places=0,)
 
 	def Company_GetFormID(self):
-		return self.FormID
+		form = Form.objects.get(CompanyID=ID)
+		return form.ID
 
-	def Company_GetProfile(self):
-		manager = Manager.objects.get(ID=self.ManagerID)
+	def Company_GetProfile(self,managerID):
+		manager = Manager.objects.get(ID=managerID)
 		return {'ID':self.ID,'Name':self.name,'Manager':manager.Name,'MaxEmployee':self.MaxEmployee}
 
 	def Company_CheckMaxEmployee(self):
