@@ -1,37 +1,58 @@
 from django.db import models
-from CompanyManagement.models import Company
+# from CompanyManagement.models import Company
+from PayslipManagement.models import Payslip
+import secrets
 
 class Employee(models.Model):
 	ID 			  = models.UUIDField(primary_key=True,)
 	Name  		  = models.CharField(max_length=100)
 	LastName 	  = models.CharField(max_length=100)
-	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,)
+	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
 	PersonnelCode = models.DecimalField(max_digits=10, decimal_places=0,)
 	AccountNumber = models.DecimalField(max_digits=10, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
 	EmailAddress  = models.EmailField(max_length=254)
-	Token 		  = models.CharField(max_length=200)
+	Token 		  = models.CharField(max_length=16)
 
 	def Employee_SetToken(self):
-		pass 
+		self.Token = secrets.token_hex(16)
 
 	def Employee_DeleteToken(self):
-		pass
+		self.update(Token=None)
 
 	def Employee_GetPayslip(self):
-		pass
+		return Payslip.objects.get(CompanyID=self.CompanyID,EmployeeID=self.ID).Payslip_Show()
 
-	def Employee_GetReport(self):
-		pass
+	# Not needed for now :)
+	# def Employee_GetReport(self):
+	# 	pass
 
-	def Employee_Create(self):
-		pass
+	def Employee_Create(self,name,lastname,companyid,personnelcode,accountnumber,phonenumber,email):
+		employee = Employee(
+							Name=name,
+							LastName=lastname,
+							CompanyID=companyid,
+							PersonnelCode=personnelcode,
+							AccountNumber=accountnumber,
+							PhoneNumber=phonenumber,
+							EmailAddress=email
+							)
+		employee.save()
 
-	def Employee_Edit(self):
-		pass
+	def Employee_Edit(self,filed,newValue):
+		self.update(filed=newValue)
 
 	def Employee_GetProfile(self):
-		pass
+		return {
+				'ID':self.ID,
+				'Name':self.name,
+				'LastName':self.LastName,
+				'PersonnelCode':self.PersonnelCode,
+				'AccountNumber':self.AccountNumber,
+				'PhoneNumber':self.PhoneNumber,
+				'EmailAddress':self.EmailAddress
+				}
 
-	def Employee_CountEmployees(self):
-		pass
+
+def Employee_CountEmployees(companyID):
+	Employee.objects.filter(CompanyID=companyID).count()
