@@ -1,10 +1,10 @@
 from django.db import models
-# from CompanyManagement.models import Company
+import uuid
 from PayslipManagement.models import Payslip
 import secrets
 
 class Employee(models.Model):
-	ID 			  = models.UUIDField(primary_key=True,)
+	ID 			  = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
 	Name  		  = models.CharField(max_length=100)
 	LastName 	  = models.CharField(max_length=100)
 	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
@@ -12,7 +12,7 @@ class Employee(models.Model):
 	AccountNumber = models.DecimalField(max_digits=10, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
 	EmailAddress  = models.EmailField(max_length=254)
-	Token 		  = models.CharField(max_length=100)
+	Token 		  = models.CharField(max_length=16)
 
 	def Employee_SetToken(self):
 		self.Token = secrets.token_hex(16)

@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
-
+import uuid
 #from CompanyManagement.models import Company
-# Create your models here.
 
 class Form(models.Model):
-    ID 			  = models.UUIDField(primary_key=True,)
-    CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
-    Field         =ArrayField(ArrayField(models.CharField(max_length=100)))
+    ID        = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
+    CompanyID = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
+    Field     = ArrayField(ArrayField(models.CharField(max_length=100)))
 
     def Form_AddField(self,name,type):
         fields=self.Field

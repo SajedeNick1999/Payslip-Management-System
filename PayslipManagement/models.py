@@ -1,10 +1,9 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
-# from CompanyManagement.models import Company
-# from EmployeeManagement.models import Employee
+import uuid
 
 class Payslip(models.Model):
-	PayslipID  		 = models.UUIDField(primary_key=True,)
+	PayslipID  		 = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
 	CompanyID  		 = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
 	Date 	   		 = models.DateField(auto_now=False, auto_now_add=True,)
 	EmployeeID 		 = models.ForeignKey('EmployeeManagement.Employee',on_delete=models.CASCADE,default=0)
