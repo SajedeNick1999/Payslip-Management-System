@@ -8,7 +8,8 @@ class Employee(models.Model):
 	Name  		  = models.CharField(max_length=100)
 	LastName 	  = models.CharField(max_length=100)
 	CompanyID 	  = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
-	PersonnelCode = models.DecimalField(max_digits=10, decimal_places=0,)
+	PersonnelCode = models.DecimalField(max_digits=10, decimal_places=0, unique=True)
+	Password	  = models.CharField(max_length=10,blank=False, null=False, default='1234')
 	AccountNumber = models.DecimalField(max_digits=16, decimal_places=0,)
 	PhoneNumber   = models.DecimalField(max_digits=10, decimal_places=0,)
 	EmailAddress  = models.EmailField(max_length=254)
@@ -20,8 +21,8 @@ class Employee(models.Model):
 	def Employee_DeleteToken(self):
 		self.update(Token=None)
 
-	def Employee_GetPayslip(self,date):
-		return Payslip.objects.get(EmployeeID=self,Date=date).Payslip_Show()
+	def Employee_GetPayslip(self):
+		return Payslip.objects.get(CompanyID=self.CompanyID,EmployeeID=self.ID).Payslip_Show()
 
 	# Not needed for now :)
 	# def Employee_GetReport(self):

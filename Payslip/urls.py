@@ -31,4 +31,5 @@ urlpatterns = [
     path('editfield/<int:index>/<str:name>/<str:token>/<uuid:id>/',editfield_view,name="EditField"),
     path('deletefield/<int:index>/<str:token>/<uuid:id>/',deletefield_view,name="DeleteField"),
     path('showform/<str:token>/<uuid:id>/',showform_view,name="ShowForm"),
+    path('login/<int:username>/<str:password>/', login_view, name="Login"), # username = personnelCode / password = password
 ]
