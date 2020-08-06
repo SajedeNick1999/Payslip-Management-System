@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from ManagerManagement.models import Manager
 from EmployeeManagement.models import Employee
 
-def login_view(request,username,password): 
+def login_view(request,username,password):
 	# username == personnelCode
 	# password == password
 	employee = Employee.objects.filter(PersonnelCode=username,Password=password).first()

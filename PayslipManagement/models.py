@@ -14,8 +14,8 @@ class Payslip(models.Model):
 		payslip = Payslip(CompanyID=compID,Date=date,EmployeeID=employeeID,LastModifiedDate="time",Data=data)
 		payslip.save()
 
-	def Payslip_Edit(compID,payslipID,employeeID,date,data):
-		payslip = Payslip(PayslipID=payslipID,CompanyID=compID,Date=date,EmployeeID=employeeID,LastModifiedDate="time",Data=data)
+	def Payslip_Edit(payslipID,data):
+		payslip = Payslip(PayslipID=payslipID,LastModifiedDate="time",Data=data)
 		payslip.save()
 
 	def Payslip_Show(self):

@@ -62,3 +62,25 @@ def GetId_view (request,name):
         'id':emp.ID
     }
     return JsonResponse(data)
+
+def AddPayslipManual_view(request):
+    obj=request.GET.dict()
+    manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=obj['id']))
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != obj['token']:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        manager.Manager_AddPayslipManual(obj['EmployeeID'],obj['Date'],obj['JsonData'])
+        return JsonResponse({'ACK':1,'status':200})
+
+def EditPayslip_view(request):
+    obj=request.GET.dict()
+    manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=obj['id']))
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != obj['token']:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        manager.Manager_EditPayslip(obj['PayslipID'],obj['JsonData'])
+        return JsonResponse({'ACK':1,'status':200})
