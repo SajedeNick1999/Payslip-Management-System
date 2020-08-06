@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from CompanyManagement.views import CompanyAdd_view
 from ManagerManagement.views import EmployeeList_view,DeletePayslip_view,ShowPayslip_view,GetId_view
+from FormManagement.views import addfield_view,editfield_view,deletefield_view,showform_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,9 @@ urlpatterns = [
     path('deletepayslip/<uuid:payslipID>/<str:token>/<uuid:id>/',DeletePayslip_view,name='DeletePayslip'),
     path('showpayslip/<uuid:employeeID>/<str:date>/<str:token>,<uuid:id>/',ShowPayslip_view,name='ShowPayslip'),
     path('getcompany/<str:name>/',CompanyAdd_view,name='CompanyAdd'),
+    path('getcompany/<str:name>/',CompanyAdd_view,name="CompanyAdd"),
+    path('addfield/<str:name>/<int:type>/<str:token>/<uuid:id>/',addfield_view,name="AddField"),
+    path('editfield/<int:index>/<str:name>/<str:token>/<uuid:id>/',editfield_view,name="EditField"),
+    path('deletefield/<int:index>/<str:token>/<uuid:id>/',deletefield_view,name="DeleteField"),
+    path('showform/<str:token>/<uuid:id>/',showform_view,name="ShowForm"),
 ]
