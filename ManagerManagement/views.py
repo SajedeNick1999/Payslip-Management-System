@@ -9,34 +9,50 @@ from PayslipManagement.models import Payslip
 def EmployeeList_view(request,token,id):
 
     manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=id))
-    employees=list(manager.Manager_ShowEmployee())
-    data={}
-    i=0
-    data['count']=len(employees)
-    for emp in employees:
-        data[str(i)]={
-            'Name':emp.Name,
-            'LastName':emp.LastName,
-            'PersonnelCode':emp.PersonnelCode
-        }
-        i=i+1
-    return JsonResponse(data)
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != token:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        employees=list(manager.Manager_ShowEmployee())
+        data={}
+        i=0
+        data['count']=len(employees)
+        data['status']=200
+        for emp in employees:
+            data[str(i)]={
+                'Name':emp.Name,
+                'LastName':emp.LastName,
+                'PersonnelCode':emp.PersonnelCode
+            }
+            i=i+1
+        return JsonResponse(data)
 
 def DeletePayslip_view(request,payslipID,token,id):
     manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=id))
-    manager.Manager_DeletePayslip(payslipID)
-    return JsonResponse({'ACK':1})
-    #return Ack
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != token:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        manager.Manager_DeletePayslip(payslipID)
+        return JsonResponse({'ACK':1,'status':200})
+
 
 def ShowPayslip_view(request,employeeID,date,token,id):
     manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=id))
-    emp=Employee.objects.get(EmployeeID=employeeID)
-    data={
-        'PayslipID':Payslip.objects.get(EmployeeID=employeeID,Date=date).PayslipID,
-        'Data':emp.Employee_GetPayslip()
-        
-    }
-    return JsonResponse(data)
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != token:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        emp=Employee.objects.get(EmployeeID=employeeID)
+        data={
+            'PayslipID':Payslip.objects.get(EmployeeID=employeeID,Date=date).PayslipID,
+            'Data':emp.Employee_GetPayslip(),
+            'status':200
+        }
+        return JsonResponse(data)
 
 
 
