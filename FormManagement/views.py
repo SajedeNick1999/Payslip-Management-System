@@ -62,5 +62,12 @@ def showform_view(request,token,id):
 		else:
 			formlist = form.Form_GetForm()
 			output = {'status':200}
-
+			i = 0
+			output['count'] = len(formlist)
+			for field in formlist:
+				output[str(i)] = {
+					'name':field[0],
+					'type':field[1]
+		        	}
+				i=i+1
 			return JsonResponse(output)
