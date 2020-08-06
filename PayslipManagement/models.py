@@ -5,9 +5,9 @@ import uuid
 class Payslip(models.Model):
 	PayslipID  		 = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
 	CompanyID  		 = models.ForeignKey('CompanyManagement.Company',on_delete=models.CASCADE,default=0)
-	Date 	   		 = models.CharField(max_length=8, blank=True, null=True)
+	Date 	   		 = models.DateField(auto_now=False, auto_now_add=True,)
 	EmployeeID 		 = models.ForeignKey('EmployeeManagement.Employee',on_delete=models.CASCADE,default=0)
-	LastModifiedDate = models.CharField(max_length=8, blank=True, null=True)
+	LastModifiedDate = models.DateField(auto_now=True, auto_now_add=False,)
 	Data 			 = JSONField()
 
 	def Payslip_Add(compID,employeeID,date,data):
