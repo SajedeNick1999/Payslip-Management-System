@@ -17,8 +17,8 @@ class Manager(models.Model):
     # def Manager_EditEmployee(self):
     #     pass
     def Manager_ShowEmployee(self):
-        obj=Employee.objects.get(ID=self.EmployeeID)
-        emps=Employee.objects.filter(CompanyID=obj.CompanyID)
+        #obj=Employee.objects.get(ID=self.EmployeeID)
+        emps=Employee.objects.filter(CompanyID=self.EmployeeID.CompanyID)
         return emps;
 
     def Manager_AddField(self,name,type):
@@ -51,7 +51,7 @@ class Manager(models.Model):
         obj=Employee.objects.get(ID=self.EmployeeID)
         Payslip.Payslip_Edit(obj.CompanyID,payId,empId,date,data)
 
-    def Manager_DeletePayslip(payId):
+    def Manager_DeletePayslip(self,payId):
         obj=Payslip.objects.get(PayslipID=payId)
         obj.delete()
 

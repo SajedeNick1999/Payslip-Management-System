@@ -20,8 +20,8 @@ class Employee(models.Model):
 	def Employee_DeleteToken(self):
 		self.update(Token=None)
 
-	def Employee_GetPayslip(self):
-		return Payslip.objects.get(CompanyID=self.CompanyID,EmployeeID=self.ID).Payslip_Show()
+	def Employee_GetPayslip(self,date):
+		return Payslip.objects.get(EmployeeID=self,Date=date).Payslip_Show()
 
 	# Not needed for now :)
 	# def Employee_GetReport(self):
