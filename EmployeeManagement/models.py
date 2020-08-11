@@ -16,7 +16,8 @@ class Employee(models.Model):
 	Token 		  = models.CharField(max_length=16,blank=True, null=True)
 
 	def Employee_SetToken(self):
-		self.Token = secrets.token_hex(16)
+		self.Token = secrets.token_hex(8)
+		self.save()
 
 	def Employee_DeleteToken(self):
 		self.update(Token=None)
