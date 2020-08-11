@@ -44,12 +44,14 @@ class Manager(models.Model):
         #LastModifiedDate
         #PayslipID
         #without using payslip functions
-        Payslip.Payslip_Add(self.EmployeeID.CompanyID,empId,date,data)
+        employee=Employee.objects.get(ID=empId)
+        Payslip.Payslip_Add(self.EmployeeID.CompanyID,employee,date,data)
 
-    def Manager_EditPayslip(self,payId,date,data):
+    def Manager_EditPayslip(self,payId,data):
         #without using payslip functions
         #obj=Employee.objects.get(ID=self.EmployeeID)
-        Payslip.Payslip_Edit(payId,data)
+        payslip=Payslip.objects.get(PayslipID=payId)
+        payslip.Payslip_Edit(payId,data)
 
     def Manager_DeletePayslip(self,payId):
         obj=Payslip.objects.get(PayslipID=payId)
