@@ -46,7 +46,7 @@ def ShowPayslip_view(request,employeeID,date,token,id):
     elif manager.EmployeeID.Token != token:
         return JsonResponse({'ACK':0,'status':403}) # user is not authorized
     else:
-        emp=Employee.objects.get(EmployeeID=employeeID)
+        emp=Employee.objects.get(ID=employeeID)
         data={
             'PayslipID':Payslip.objects.get(EmployeeID=employeeID,Date=date).PayslipID,
             'Data':emp.Employee_GetPayslip(),

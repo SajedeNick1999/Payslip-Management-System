@@ -15,16 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from CompanyManagement.views import CompanyAdd_view
-from ManagerManagement.views import EmployeeList_view,DeletePayslip_view,ShowPayslip_view,GetId_view
+from CompanyManagement.views import CompanyAdd_view,hello_view
+from ManagerManagement.views import EmployeeList_view,DeletePayslip_view,ShowPayslip_view,AddPayslipManual_view,EditPayslip_view,GetId_view
 from FormManagement.views import addfield_view,editfield_view,deletefield_view,showform_view
+from EmployeeManagement.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('employeelist/<str:token>/<uuid:id>/', EmployeeList_view,name='EmployeeList'),
     path('getid/<str:name>/',GetId_view,name='GetId'),
     path('deletepayslip/<uuid:payslipID>/<str:token>/<uuid:id>/',DeletePayslip_view,name='DeletePayslip'),
-    path('showpayslip/<uuid:employeeID>/<str:date>/<str:token>,<uuid:id>/',ShowPayslip_view,name='ShowPayslip'),
+    path('showpayslip/<uuid:employeeID>/<str:date>/<str:token>/<uuid:id>/',ShowPayslip_view,name='ShowPayslip'),
     path('getcompany/<str:name>/',CompanyAdd_view,name='CompanyAdd'),
     path('getcompany/<str:name>/',CompanyAdd_view,name="CompanyAdd"),
     path('addfield/<str:name>/<int:type>/<str:token>/<uuid:id>/',addfield_view,name="AddField"),
@@ -32,4 +33,7 @@ urlpatterns = [
     path('deletefield/<int:index>/<str:token>/<uuid:id>/',deletefield_view,name="DeleteField"),
     path('showform/<str:token>/<uuid:id>/',showform_view,name="ShowForm"),
     path('login/<int:username>/<str:password>/', login_view, name="Login"), # username = personnelCode / password = password
+    path('addpayslipmanual/',AddPayslipManual_view,name="AddPayslipManual"),
+    path('editpayslip/',EditPayslip_view,name="EditPayslip"),
+    path('hello/',hello_view,name="hello"),
 ]
