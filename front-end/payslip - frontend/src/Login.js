@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Grid,Button,TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
-import axios from 'axios';
+import { useNavigate, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(()=>({
     backgroundStyle:{
@@ -23,10 +23,14 @@ const useStyles = makeStyles(()=>({
 
 const Login = () => {
     const classes = useStyles();
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [company, setCompany] = useState('');
 
     const [data, setData] = useState({});
+    const [error,setError] = useState("");
 
     var options = {
       method: 'get',
@@ -39,17 +43,25 @@ const Login = () => {
       },
       // mode: 'no-cors'
     }
-    useEffect(()=>{
-      fetch('http://127.0.0.1:8000/login/9631793/1234/')
-        .then(response => {
-          return response.json();
-        }).then(response=>{
+
+    const onLoginClick = () => {
+      fetch(`http://127.0.0.1:8000/login/${userName}/${password}/`)
+      .then(response => {
+        return response.json();
+      }).then(response=>{
+        if(response.status === 200){
           setData(response);
-        })
-    },[]);
-
-    console.log('88888888888888888888',data)
-
+          localStorage.setItem("token",response.Token);
+          localStorage.setItem("id",response.ID);
+          navigate(`dashboard/`);
+        }
+        else{
+          setError("Username or Password is wrong");
+          navigate(`/`);
+        }
+        
+      })
+    }
 
 
   return (
@@ -76,6 +88,7 @@ const Login = () => {
       <TextField
         variant="outlined"
         label="User Name"
+        autoFocus
         fullWidth
         value={userName}
         onChange={(e)=>setUserName(e.target.value)}
@@ -90,10 +103,26 @@ const Login = () => {
         onChange={(e)=>setPassword(e.target.value)}
       />
      </Grid>
+     <Grid item className={classes.item}>
+      <TextField
+        variant="outlined"
+        label="company"
+        fullWidth
+        value={company}
+        onChange={(e)=>setCompany(e.target.value)}
+      />
+     </Grid>
+     <Grid item>
+       <Typography color="error">
+         {error}
+       </Typography>
+     </Grid>
      <Grid item>
      <Button 
-      variant="outlined"
+      variant="contained"
       color="primary"
+      onClick={onLoginClick}
+      size="large"
      >
        Login
      </Button>
