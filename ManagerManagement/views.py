@@ -84,8 +84,12 @@ def AddPayslipManual_view(request):
     elif manager.EmployeeID.Token != obj['token']:
         return JsonResponse({'ACK':0,'status':403}) # user is not authorized
     else:
-        manager.Manager_AddPayslipManual(obj['EmployeeID'],obj['Date'],obj['JsonData'])
-        return JsonResponse({'ACK':1,'status':200})
+        try:
+            payslip=Payslip.objects.get(EmployeeID=obj['EmployeeID'],Date=obj['Date'])
+            return JsonResponse({'ACK':0,'status':402})
+        except Payslip.DoesNotExist:
+            manager.Manager_AddPayslipManual(obj['EmployeeID'],obj['Date'],obj['JsonData'])
+            return JsonResponse({'ACK':1,'status':200})
 
 def EditPayslip_view(request):
     obj=request.GET.dict()
