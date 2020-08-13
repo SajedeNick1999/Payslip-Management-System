@@ -3,13 +3,10 @@ import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import PayIcon from './images/PayslipManagement1.png';
-import AddManual from './images/manual.png';
-import AddByFile from './images/Excel.png';
-import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import EmployeeList from './EmployeeList';
+import Delete from 'mdi-material-ui/TrashCan';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -87,7 +84,7 @@ const useStyles = makeStyles(theme=>({
     }
 }))
 
-const AddPayslipManual = () => {
+const DeletePayslip = () => {
     const props = useParams();
     const classes = useStyles();
     const navigate = useNavigate();
@@ -98,14 +95,14 @@ const AddPayslipManual = () => {
         <Grid container alignItems="center" justify="center" className={classes.container}>
         <Grid item container spacing={8} alignItems="center" className={classes.innerContainer}>
         <Grid item>
-            <img src={PayIcon} className={classes.imageStyle} />
+            <Delete color="error" className={classes.imageStyle}/>
             <Typography variant="h4" color="textPrimary" align="center">
-                Add Payslip Manually
+                Delete Payslip
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid item>
-            <EmployeeList url="/dashboard/payslip/addManual/form/" />
+            <EmployeeList url="/dashboard/payslip/delete/" />
         </Grid>
         </Grid>
         </Grid>
@@ -114,4 +111,4 @@ const AddPayslipManual = () => {
     )
 };
 
-export default AddPayslipManual;
+export default DeletePayslip;

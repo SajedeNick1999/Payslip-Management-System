@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
@@ -90,6 +90,9 @@ const PayslipManagementPanel = () => {
     const props = useParams();
     const classes = useStyles();
     const navigate = useNavigate();
+    const [year,setYear] = useState();
+    const [month,setMonth] = useState();
+
     return (
         <>
         <Drawer />
@@ -113,6 +116,9 @@ const PayslipManagementPanel = () => {
                       required
                       placeholder="Year"
                       fullWidth
+                      value={year}
+                      onChange={(e)=>setYear(e.target.value)}
+                      helperText="Enter year as 2 digit number"
                     />
                 </Grid>
                 <Grid item className={classes.griditemTextField}>
@@ -123,12 +129,15 @@ const PayslipManagementPanel = () => {
                       placeholder="Month"
                       fullWidth
                       className={classes.textField}
+                      value={month}
+                      onChange={(e)=>setMonth(e.target.value)}
+                      helperText="Enter month as 2 digit number"
                     />
                 </Grid>
             </Grid> 
             <Grid container item justify="space-around" spacing={5}>
             <Grid item alignItems="center">
-        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/add/`)}>
+        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/add/${year}:${month}`)}>
             <Add className={`${classes.imageCardButtons} ${classes.addCard}`} />
             <Typography variant="h4" className={classes.addCard} align="center">
                 Add
@@ -136,7 +145,7 @@ const PayslipManagementPanel = () => {
         </Card>
         </Grid>
         <Grid item alignItems="center" justify="center" spacing={8}>
-        <Card className={classes.cardButtons} elevation={3} align="center">
+        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/edit/${year}:${month}`)}>
             <Edit color="primary" className={classes.imageCardButtons} />
             <Typography variant="h4" color="primary" align="center">
                 Edit
@@ -145,7 +154,7 @@ const PayslipManagementPanel = () => {
         </Grid>
 
         <Grid item alignItems="center" justify="center" spacing={8}>
-        <Card className={classes.cardButtons} elevation={3} align="center">
+        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/delete/${year}:${month}`)}>
             <Delete color="error" className={classes.imageCardButtons} />
             <Typography variant="h4" color="error" align="center">
                 Delete

@@ -104,7 +104,7 @@ const AddPayslip = () => {
         <Divider orientation="vertical" flexItem/>
         <Grid container item justify="space-around"className={classes.textFieldContainer} alignItems="center">
             <Grid item alignItems="center">
-        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/addManual/`)}>
+        <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/addManual/${props.date}/`)}>
             <img src={AddManual} className={`${classes.imageCardButtons} ${classes.addCard}`} />
             <Typography variant="h4" color="primary" align="center">
                 Add Manual
