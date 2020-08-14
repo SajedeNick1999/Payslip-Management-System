@@ -7,8 +7,8 @@ import PayIcon from './images/PayslipManagement1.png';
 import Employees from './images/Employees.png';
 import Form from './images/Form.png';
 import Background from './images/Picture2.png';
-import ShowPayslip from './images/showpayslip.png';
-import Report from './images/report.png';
+import ShowPayslip from './images/ShowPayslip1.png';
+import Report from './images/Report2.png';
 
 
 const useStyles = makeStyles(theme=>({
@@ -44,7 +44,13 @@ const useStyles = makeStyles(theme=>({
     },
     cardContain:{
         width: '100%',
+    },
+    ReportImageStyle: {
+        width: 160,
+        height: 200,
+        marginBottom: 60,
     }
+
 }))
 
 const ManagementPanel = () => {
@@ -98,7 +104,7 @@ const ManagementPanel = () => {
 
         <Grid item>
         <Card className={classes.cardStyle} elevation={3} align="center">
-            <img src={Report} className={classes.imageStyle} />
+            <img src={Report} className={classes.ReportImageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
                 Payslip Report
             </Typography>

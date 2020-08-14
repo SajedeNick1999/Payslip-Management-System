@@ -140,7 +140,7 @@ export default function MiniDrawer() {
               </ListItemIcon>
               <ListItemText className={classes.listItemText} primary="Visit Payslip" />
             </ListItem>
-            <ListItem>
+            <ListItem button>
             <ListItemIcon>
                 <ChartBar className={classes.icons}/>
               </ListItemIcon>
