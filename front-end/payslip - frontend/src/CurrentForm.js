@@ -54,12 +54,13 @@ const Types = [
     },
 ];
 
-const CurrentForm = () => {
+const CurrentForm = ({isButton,setSelectedVal}) => {
     const classes = useStyles();
     const token=localStorage.getItem("token");
     const id=localStorage.getItem("id");
     const [fields,setFields]=useState([]);
     const [state,setState]=useState({});
+    
 
     useEffect(()=>{
         fetch(`http://127.0.0.1:8000/showform/${token}/${id}/`)
@@ -85,13 +86,10 @@ const CurrentForm = () => {
         <List>
             {fields.map((field,index) => (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                 <>
-                <ListItem>
-                  <ListItemAvatar>
-                      
-                  </ListItemAvatar>
+                <ListItem button={isButton} onClick={isButton? setSelectedVal(index): null}>
                   <ListItemText 
-                    primary={<Typography variant="h5">{`${field.name}`}</Typography>}  
-                    secondary={<Typography variant="h5">{`${Types[index].label}`}</Typography>} />
+                    primary={field.name}
+                    secondary={Types[index].label} />
                 </ListItem>
                 <Divider />
                 </>

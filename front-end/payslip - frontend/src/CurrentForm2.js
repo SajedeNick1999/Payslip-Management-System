@@ -60,6 +60,11 @@ const CurrentForm2 = () => {
     const id=localStorage.getItem("id");
     const [fields,setFields]=useState([]);
     const [state,setState]=useState({});
+    const [fieldIndex,setFieldIndex] = useState({});
+
+    useEffect(()=> {
+        setFieldIndex(fieldIndex);
+      },[fieldIndex])
 
     useEffect(()=>{
         fetch(`http://127.0.0.1:8000/showform/${token}/${id}/`)
@@ -85,7 +90,7 @@ const CurrentForm2 = () => {
         <List>
             {fields.map((field,index) => (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                 <>
-                <ListItem button>
+                <ListItem button onClick={setFieldIndex}>
                   {/* <ListItemAvatar>
                       
                   </ListItemAvatar> */}

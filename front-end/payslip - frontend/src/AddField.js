@@ -148,7 +148,7 @@ const AddField = () => {
             <Divider orientation="vertical" flexItem/>
             
             <Grid item>
-            <CurrentForm />
+            <CurrentForm isButton={false}/>
             
             </Grid>
 

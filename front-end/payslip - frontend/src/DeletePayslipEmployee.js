@@ -1,10 +1,9 @@
 import React, {useState,useEffect} from 'react';
-import { useNavigate, Redirect, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import EditFieldimg from './images/EditFieldimg.png';
+import Delete from './images/DeletePayslip.png';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
@@ -12,7 +11,6 @@ import useFormState from './useFormState'
 import FormField from './FormField';
 import ConfirmModal from './ConfirmModal';
 import StatusModal from './StatusModal';
-import CurrentForm from './CurrentForm';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -92,104 +90,115 @@ const useStyles = makeStyles(theme=>({
     }
 }))
 
-const EditField = () => {
+const DeletePayslipEmployee = () => {
     const props = useParams();
     const classes = useStyles();
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const [fields,setFields] = useState([]);
+    const [employeeInfo,setEmployeeInfo] = useState({});
+    const [payslip,setPayslip] = useState({});
+    const [payslipId,setPayslipId] = useState({});
     const [showConfirmModal,setshowConfirmModal] = useState(false);
 
     const [showStatusModal,setShowStatusModal] = useState(false);
     const [status,setStatus] = useState(false);
 
-    const {state,setState,handleChange} = useFormState();
-    const [newName,setNewName]=useState("");
-    const [Index,setIndex]=useState();
-    const [error, setError] = useState("");
-    const [isSubmitValid, setIsSubmitValid] = useState(true);
-    const [selectedVal,setSelectedVal]=useState();
+    const {state,setState,handleChange} = useFormState(payslip);
 
     const handleClose =() => {
       setshowConfirmModal(false);
     }
     const handleOpen = () => {
-      fields.map((field,index)=> {
-        // if(!state[index]){
-        //   console.log('in if');
-        //  setIsSubmitValid(false);
-        // }
-       });
-       setshowConfirmModal(true);
+      setshowConfirmModal(true);
     }
 
     const handleCloseStatus =() => {
       setShowStatusModal(false);
-      navigate('/dashboard/form/');
+      navigate('/dashboard/payslip/');
     }
     const handleOpenStatus = () => {
       setShowStatusModal(true);
     }
-    
-    useEffect(()=> {
-      setState(true);
-    },[])//?????
-
-    const renderTextFields = () => {
-      return fields.map((field,index)=>(
-          <Grid item>
-          <FormField 
-              field={field}
-              index={index}
-              setState={handleChange(index)}
-              state={state[index]}
-              disabled={false}
-          />
-       </Grid>
-      ))
-  }
-  
-
-    // useEffect(()=>{
-    //     fetch(`http://127.0.0.1:8000/showform/${token}/${id}/`)
-    //     .then(response => {
-    //       return response.json();
-    //     }).then(response=>{
-    //       if(response.status === 200){
-    //         const fieldArray = Object.keys(response.fields).map((key) => response.fields[key]);
-    //         setFields(fieldArray);
-    //       } 
-    //     });
-
-    //   },[]);
 
 
-    const handleSubmit = () => {
-      if(isSubmitValid){
-       
-         setIndex(fields.index);
-          setNewName(fields.field);
-         
+    useEffect(()=>{
+        fetch(`http://127.0.0.1:8000/showform/${token}/${id}/`)
+        .then(response => {
+          return response.json();
+        }).then(response=>{
+          if(response.status === 200){
+            const fieldArray = Object.keys(response.fields).map((key) => response.fields[key]);
+            setFields(fieldArray);
+          } 
+        });
 
-      fetch(`http://127.0.0.1:8000/editfield/${Index}/${newName}/${token}/${id}/`)
+        fetch(`http://127.0.0.1:8000/getemployeeinfo/${props.id}/${token}/${id}/`)
+        .then(response => {
+          return response.json();
+        }).then(response=>{
+          if(response.status === 200){
+            setEmployeeInfo(response);
+          } 
+        })
+      },[]);
+
+      useEffect(()=> {
+        fetch(`http://127.0.0.1:8000/showpayslip/${employeeInfo.id}/${props.date}/${token}/${id}/`)
+        .then(response => {
+          return response.json();
+        }).then(response=>{
+          if(response.status === 200){
+            setPayslip(JSON.parse(response.Data));
+            setPayslipId(response.PayslipID);
+          } 
+        })
+      },[employeeInfo]);
+
+      useEffect(()=> {
+        setState(payslip);
+      },[payslip])
+
+     const handleSubmit = () => {
+
+      fetch(`http://127.0.0.1:8000/deletepayslip/${payslipId}/${token}/${id}/`)
       .then(function (response) {
-        return response.json();
+        return response;
       })
       .then(function (response) {
         setStatus(response.status);
       });
+
       handleClose();
       handleOpenStatus();
       setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/form/');
+        navigate('/dashboard/payslip/');
       },3000);
     }
-    else{
-      handleClose();
+
+    const renderTextFields = () => {
+        return fields.map((field,index)=>(
+            <Grid item>
+            <FormField 
+                field={field}
+                index={index}
+                setState={handleChange(index)}
+                state={state[index]}
+                disabled
+            />
+         </Grid>
+        ))
     }
-    }
+
+    const renderEmptyForm = () => (
+      <Grid item>
+        <Typography>
+          There is no payslip for this employee in the current date.
+        </Typography>
+      </Grid>
+    )
 
     return (
         <>
@@ -210,29 +219,37 @@ const EditField = () => {
         <Grid container alignItems="center" justify="center" className={classes.container}>
         <Grid item container spacing={8} alignItems="center" className={classes.innerContainer}>
         <Grid item>
-            <img src={EditFieldimg} className={classes.imageStyle} />
+            <img src={Delete} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Edit Field
+                Add Payslip Manually
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
-        
-            <CurrentForm isButton={true} setSelectedVal={setSelectedVal}/>
             <Grid  item >
-             
-             
+             <Card className={classes.cardButtons} elevation={3}>
+             <CardHeader
+                  avatar={
+                    <Avatar>
+                    <AccountCircle />
+                    </Avatar> 
+                  }
+                  title={
+                    <Typography variant="h4">
+                    {`${employeeInfo.Name} ${employeeInfo.LastName}`}
+                    </Typography>
+                  }
+               />
                
                <Grid container spacing={3} direction="column">
                  {
-                    renderTextFields()
+                    payslip[0] ? renderTextFields() : renderEmptyForm()
                  }
-               </Grid> 
-               
+               </Grid>   
+               </Card>
                <Grid container spacing={3} justify="center">
-               
                  <Grid item>
                  <Button color="primary" variant="contained" onClick={handleOpen}>
-                      Confirm
+                      Delete
                   </Button>
                  </Grid>
                  </Grid>
@@ -243,4 +260,5 @@ const EditField = () => {
         </>
     )
 };
-export default EditField;
+
+export default DeletePayslipEmployee;

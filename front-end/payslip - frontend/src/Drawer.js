@@ -22,8 +22,9 @@ import FilePlus from 'mdi-material-ui/FilePlus';
 import PlusBoxMultiple from 'mdi-material-ui/PlusBoxMultiple';
 import FormSelect from 'mdi-material-ui/FormSelect';
 // import { Navigate } from 'react-router';
-// import { useNavigation } from '@react-navigation/native';
+//import { useNavigation } from '@react-navigation/native';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';                                                                                                                                                                                                                                                
+ 
 
 const drawerWidth = 300;
 
@@ -90,13 +91,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-  // const navigation = useNavigation();
-
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  
+  const navigate =useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,7 +124,7 @@ export default function MiniDrawer() {
       >
         <List>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/')}>
               <ListItemIcon>
                 <AccountCircle className={classes.icons}/>
               </ListItemIcon>
@@ -139,18 +138,18 @@ export default function MiniDrawer() {
               <ListItemText className={classes.listItemText} primary="Employee Management" />
             </ListItem>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/payslip/')}>
               <ListItemIcon>
                 <FilePlus className={classes.icons}/>
               </ListItemIcon>
               <ListItemText className={classes.listItemText} primary="Payslip Management" />
             </ListItem>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/form/')}>
               <ListItemIcon>
                 <FormSelect className={classes.icons}/>
               </ListItemIcon>
-              <ListItemText className={classes.listItemText} primary="Format Management"/>
+              <ListItemText className={classes.listItemText} primary="Form Management"/>
             </ListItem>
 
         </List>

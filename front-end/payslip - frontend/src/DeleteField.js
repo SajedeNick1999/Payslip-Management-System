@@ -1,18 +1,15 @@
 import React,{useState, useEffect} from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
-import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
+import {Button, Grid, Card, Typography, Divider,List, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import PayIcon from './images/PayslipManagement1.png';
-import Add from 'mdi-material-ui/PlusCircle';
-import Edit from 'mdi-material-ui/PencilCircle';
-import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import DeleteFieldimg from './images/DeleteFieldimg.png';
 import AddSign from './images/AddSign.png';
 import MenuItem from '@material-ui/core/MenuItem';
-import CurrentForm2 from './CurrentForm2';
+import CurrentForm from './CurrentForm';
 import ConfirmModal from './ConfirmModal';
 import StatusModal from './StatusModal';
 
@@ -116,14 +113,13 @@ const DeleteField = () => {
     const [target,setTarget]=useState('');
     const token=localStorage.getItem("token");
     const id=localStorage.getItem("id");
-    
+    const [selectedVal,setSelectedVal]=useState();
 
 
     const [showConfirmModal,setshowConfirmModal] = useState(false);
-
     const [showStatusModal,setShowStatusModal] = useState(false);
     const [status,setStatus] = useState(false);
-    // const {state,setState,handleChange} = useFormState(payslip);
+    
 
     const [fieldIndex,setFieldIndex] = useState({});
     const handleClose =() => {
@@ -141,13 +137,12 @@ const DeleteField = () => {
       setShowStatusModal(true);
     }
 
-    useEffect(()=> {
-      setFieldIndex(fieldIndex);
-    },[])
+    
 
   const onDeleteClick = () => {
 
-      fetch(`http://127.0.0.1:8000/deletefield/${fieldIndex} ${token} ${id}/`)
+
+      fetch(`http://127.0.0.1:8000/deletefield/${selectedVal}/${token}/${id}/`)
       .then(response => {
         return response.json();
       }).then(function (response){
@@ -191,10 +186,9 @@ const DeleteField = () => {
             <Divider orientation="vertical" flexItem/>
             
             <Grid item>
-            <CurrentForm2 />
+            <CurrentForm isButton={true} setSelectedVal={setSelectedVal}/>
             </Grid>
-
-
+   
             <Grid item
             container       
             direction="column"
@@ -204,7 +198,7 @@ const DeleteField = () => {
             alignItems="center"
             >
                 
-            {/* <Grid item>
+            <Grid item>
                 <Button 
                 variant="contained"
                 color="primary"
@@ -213,7 +207,7 @@ const DeleteField = () => {
                 >
                 delete
                 </Button>
-            </Grid> */}
+            </Grid>
 
             </Grid>
 

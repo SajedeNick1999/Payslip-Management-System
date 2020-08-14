@@ -2,12 +2,16 @@ import React,{useState, useEffect} from 'react';
 import {Grid,Button,TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
 import { useNavigate, Redirect } from 'react-router-dom';
+import Background from './images/Login_Background.png';
 
 const useStyles = makeStyles(()=>({
     backgroundStyle:{
-      background: "linear-gradient(to right bottom, #430089, #82ffa1)",
-      height:"100vh",
-       width:"100%",
+        width:'100%', 
+        height: '100vh', 
+        overflowX: 'hidden',
+        backgroundImage: `url(${Background})`,
+        backgroundPositionX: '70%',
+        backgroundPositionY: '20%',
     },
     container:{
       width: "33%",
@@ -49,11 +53,17 @@ const Login = () => {
       .then(response => {
         return response.json();
       }).then(response=>{
-        if(response.status === 200){
+        if(response.status === 200 && response.isManager === 1){
           setData(response);
           localStorage.setItem("token",response.Token);
           localStorage.setItem("id",response.ID);
           navigate(`dashboard/`);
+        }
+        else if(response.status === 200 && response.isManager === 0){
+          setData(response);
+          localStorage.setItem("token",response.Token);
+          localStorage.setItem("id",response.ID);
+          navigate(`employee/`);
         }
         else{
           setError("Username or Password is wrong");
@@ -101,15 +111,6 @@ const Login = () => {
         fullWidth
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
-      />
-     </Grid>
-     <Grid item className={classes.item}>
-      <TextField
-        variant="outlined"
-        label="company"
-        fullWidth
-        value={company}
-        onChange={(e)=>setCompany(e.target.value)}
       />
      </Grid>
      <Grid item>
