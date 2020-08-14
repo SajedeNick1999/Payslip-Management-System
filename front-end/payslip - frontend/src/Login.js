@@ -2,22 +2,23 @@ import React,{useState, useEffect} from 'react';
 import {Grid,Button,TextField, Typography} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles';
 import { useNavigate, Redirect } from 'react-router-dom';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 
-const useStyles = makeStyles(()=>({
+const useStyles = makeStyles(theme=>({
     backgroundStyle:{
         width:'100%', 
         height: '100vh', 
         overflowX: 'hidden',
         backgroundImage: `url(${Background})`,
-        backgroundPositionX: '70%',
-        backgroundPositionY: '20%',
+        backgroundPositionX: '100%',
+        backgroundPositionY: '100%',
     },
     container:{
       width: "33%",
       height: "50%",
       backgroundColor:"white",
       borderRadius: 20,
+      boxShadow: theme.shadows[20]
     },
     item:{
       width: "70%",
@@ -35,18 +36,6 @@ const Login = () => {
 
     const [data, setData] = useState({});
     const [error,setError] = useState("");
-
-    var options = {
-      method: 'get',
-      headers: {
-          "Access-Control-Request-Headers": "*",
-          "Access-Control-Request-Method": "*",
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'true',
-
-      },
-      // mode: 'no-cors'
-    }
 
     const onLoginClick = () => {
       fetch(`http://127.0.0.1:8000/login/${userName}/${password}/`)
@@ -90,7 +79,7 @@ const Login = () => {
      alignItems="center"
      >
        <Grid item>
-         <Typography>
+         <Typography variant="h5" >
            Payslip management system
          </Typography>
        </Grid>

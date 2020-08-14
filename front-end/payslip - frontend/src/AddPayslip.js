@@ -8,7 +8,7 @@ import AddManual from './images/manual.png';
 import AddByFile from './images/Excel.png';
 import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{

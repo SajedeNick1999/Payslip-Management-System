@@ -5,7 +5,7 @@ import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Delete from './images/DeletePayslip.png';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
 import useFormState from './useFormState'
 import FormField from './FormField';
@@ -18,8 +18,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -188,7 +188,7 @@ const DeletePayslipEmployee = () => {
                 state={state[index]}
                 disabled
             />
-         </Grid>
+            </Grid>
         ))
     }
 
@@ -221,7 +221,7 @@ const DeletePayslipEmployee = () => {
         <Grid item>
             <img src={Delete} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Add Payslip Manually
+                Delete Payslip Manually
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>

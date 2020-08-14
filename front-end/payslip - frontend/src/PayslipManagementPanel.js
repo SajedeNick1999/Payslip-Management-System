@@ -8,7 +8,7 @@ import Add from 'mdi-material-ui/PlusCircle';
 import Edit from 'mdi-material-ui/PencilCircle';
 import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -104,7 +104,7 @@ const PayslipManagementPanel = () => {
     }
 
     const handleNavigate = (url) => {
-        if(year && month && (year>1370 && year?.length===4) && (month <= 12 && month>=1)){
+        if(year && month && (year >= 1370 && year?.length===4) && (month <= 12 && month>=1)){
             navigate(url);
         }
         else{

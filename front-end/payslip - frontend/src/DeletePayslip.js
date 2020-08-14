@@ -4,7 +4,7 @@ import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/c
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import EmployeeList from './EmployeeList';
 import Delete from './images/DeletePayslip.png';
 
@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{

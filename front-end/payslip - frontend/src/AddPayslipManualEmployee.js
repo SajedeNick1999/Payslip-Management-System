@@ -9,7 +9,7 @@ import AddManual from './images/manual.png';
 import AddByFile from './images/Excel.png';
 import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
 import ConfirmModal from './ConfirmModal';
 import StatusModal from "./StatusModal";
@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -118,6 +118,10 @@ const AddPayslipManualEmployee = () => {
          setError("All fields are required");
          setIsSubmitValid(false);
         }
+        if((field.type === "1" || field.type === "3") && state[index] && !/^\d*(\.\d+)?$/.test(state[index])){
+          setError(`Type of ${field.name} is invalid`);
+          setIsSubmitValid(false);
+        }
        });
        setshowConfirmModal(true);
     }
@@ -155,7 +159,6 @@ const AddPayslipManualEmployee = () => {
      
 
      const handleSubmit = () => {
-        
       if(isSubmitValid){
        const jsonMessage = {
          id: id,

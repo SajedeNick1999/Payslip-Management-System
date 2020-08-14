@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import PayIcon from './images/PayslipManagement1.png';
 import Employees from './images/Employees.png';
 import Form from './images/Form.png';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     cardStyle: {
