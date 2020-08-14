@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
-import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
+import {Box, Grid, Card, Typography, Divider, TextField, CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import PayIcon from './images/AddPayslipManually.png';
@@ -9,6 +9,7 @@ import AddByFile from './images/Excel.png';
 import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Picture2.png';
+import ArrowLeft from 'mdi-material-ui/ArrowLeft';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -83,6 +84,10 @@ const useStyles = makeStyles(theme=>({
     },
     addCard:{
         color: Green[500],
+    },
+    icons:{
+    color:theme.palette.common.black,
+    fontSize: 50,
     }
 }))
 
@@ -112,7 +117,7 @@ const AddPayslip = () => {
         </Card>
         </Grid>
         <Grid item alignItems="center" justify="center">
-        <Card className={classes.cardButtons} elevation={3} align="center">
+        <Card className={classes.cardButtons} elevation={3} align="center">  
             <img src={AddByFile} color="primary" className={classes.imageCardButtons} />
             <Typography variant="h4" color="primary" align="center">
                 Add by File
