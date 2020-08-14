@@ -4,13 +4,15 @@ import axios from 'axios';
 import {Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import PayIcon from './images/PayslipManagement1.png';
+import PayIcon from './images/AddPayslipManually.png';
 import AddManual from './images/manual.png';
 import AddByFile from './images/Excel.png';
 import Delete from 'mdi-material-ui/TrashCan';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
+import ConfirmModal from './ConfirmModal';
+import StatusModal from "./StatusModal";
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -98,8 +100,35 @@ const AddPayslipManualEmployee = () => {
     const id = localStorage.getItem("id");
     const [fields,setFields] = useState([]);
     const [employeeInfo,setEmployeeInfo] = useState({});
-    
+    const [showConfirmModal,setshowConfirmModal] = useState(false);
+
+    const [showStatusModal,setShowStatusModal] = useState(false);
+    const [status,setStatus] = useState(false);
     const [state,setState] = useState({});
+
+    const [error, setError] = useState("");
+    const [isSubmitValid, setIsSubmitValid] = useState(true);
+
+    const handleClose =() => {
+      setshowConfirmModal(false);
+    }
+    const handleOpen = () => {
+      fields.map((field,index)=> {
+        if(!state[index]){
+         setError("All fields are required");
+         setIsSubmitValid(false);
+        }
+       });
+       setshowConfirmModal(true);
+    }
+
+    const handleCloseStatus =() => {
+      setShowStatusModal(false);
+      navigate('/dashboard/payslip/');
+    }
+    const handleOpenStatus = () => {
+      setShowStatusModal(true);
+    }
 
 
     useEffect(()=>{
@@ -126,6 +155,8 @@ const AddPayslipManualEmployee = () => {
      
 
      const handleSubmit = () => {
+        
+      if(isSubmitValid){
        const jsonMessage = {
          id: id,
          token: token,
@@ -140,18 +171,41 @@ const AddPayslipManualEmployee = () => {
 
       fetch(url)
       .then(function (response) {
-        // handle success
-        return response;
+        return response.json();
       })
       .then(function (response) {
-      // always executed
+        setStatus(response.status);
       });
+      handleClose();
+      handleOpenStatus();
+      setTimeout(()=>{
+        handleCloseStatus();
+        navigate('/dashboard/payslip/');
+      },3000);
+      }
+      else {
+          handleClose();
+          setIsSubmitValid(true)
+      }
     }
 
 
     return (
         <>
         <Drawer />
+        <ConfirmModal 
+          onClose={handleClose} 
+          open={showConfirmModal}
+          handleSubmit={handleSubmit} 
+          content="Are you sure you want to add?" 
+
+        />
+        <StatusModal
+            onClose={handleCloseStatus} 
+            open={showStatusModal} 
+            content={status===200 ? "Adding was successfull" : "Adding has Failed"} 
+            status={status}
+        />
         <Grid container alignItems="center" justify="center" className={classes.container}>
         <Grid item container spacing={8} alignItems="center" className={classes.innerContainer}>
         <Grid item>
@@ -186,14 +240,20 @@ const AddPayslipManualEmployee = () => {
                         fullWidth
                         value={state[index]}
                         onChange={(e)=>setState({...state,[index]:e.target.value})}
+                        required
                       />
                     </Grid>
                   ))}
                </Grid>   
                </Card>
                <Grid container spacing={3} justify="center">
+               <Grid item container>
+                  <Typography variant="body1" color="error">
+                      {error}
+                  </Typography>
+                </Grid>
                  <Grid item>
-                 <Button color="primary" variant="contained" onClick={handleSubmit}>
+                 <Button color="primary" variant="contained" onClick={handleOpen}>
                       Confirm
                   </Button>
                  </Grid>

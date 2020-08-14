@@ -14,6 +14,7 @@ import EditPayslip from './EditPayslip';
 import EditPayslipEmployee from './EditPayslipEmployee';
 import DeletePayslip from './DeletePayslip';
 import DeletePayslipEmployee from './DeletePayslipEmployee';
+import EmployeePanel from './EmployeePanel';
 
 const theme = createMuiTheme({
   palette: {
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/dashboard/payslip/edit/:date/:id/" element={<EditPayslipEmployee />} />
         <Route path="/dashboard/payslip/delete/:date" element={<DeletePayslip />} />
         <Route path="/dashboard/payslip/delete/:date/:id/" element={<DeletePayslipEmployee />} />
+        <Route path="/employee/" element={<EmployeePanel />} />
       </Routes>
       </BrowserRouter>
     </ThemeProvider>

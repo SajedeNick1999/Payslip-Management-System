@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import EmployeeList from './EmployeeList';
-import Delete from 'mdi-material-ui/TrashCan';
+import Delete from './images/DeletePayslip.png';
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -95,7 +95,7 @@ const DeletePayslip = () => {
         <Grid container alignItems="center" justify="center" className={classes.container}>
         <Grid item container spacing={8} alignItems="center" className={classes.innerContainer}>
         <Grid item>
-            <Delete color="error" className={classes.imageStyle}/>
+            <img src={Delete} color="error" className={classes.imageStyle}/>
             <Typography variant="h4" color="textPrimary" align="center">
                 Delete Payslip
             </Typography>

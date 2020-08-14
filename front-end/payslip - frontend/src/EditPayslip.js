@@ -3,7 +3,7 @@ import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import Edit from './images/Edit.png';
+import Edit from './images/EditPayslip.png';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import EmployeeList from './EmployeeList';

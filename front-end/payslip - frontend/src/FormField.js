@@ -10,6 +10,7 @@ const FormField = ({field,index,state,setState,disabled}) => {
                 value={state || ''}
                 onChange={(e)=>setState(e.target.value)}
                 disabled={disabled}
+                required
             />
     )
 

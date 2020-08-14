@@ -3,7 +3,7 @@ import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import PayIcon from './images/PayslipManagement1.png';
+import PayIcon from './images/AddPayslipManually.png';
 import AddManual from './images/manual.png';
 import AddByFile from './images/Excel.png';
 import Delete from 'mdi-material-ui/TrashCan';

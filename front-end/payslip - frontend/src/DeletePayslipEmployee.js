@@ -1,10 +1,9 @@
 import React, {useState,useEffect} from 'react';
-import { useNavigate, Redirect, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import Edit from './images/Edit.png';
+import Delete from './images/DeletePayslip.png';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
@@ -130,7 +129,6 @@ const DeletePayslipEmployee = () => {
           return response.json();
         }).then(response=>{
           if(response.status === 200){
-            console.log('888888888888',response)
             const fieldArray = Object.keys(response.fields).map((key) => response.fields[key]);
             setFields(fieldArray);
           } 
@@ -221,7 +219,7 @@ const DeletePayslipEmployee = () => {
         <Grid container alignItems="center" justify="center" className={classes.container}>
         <Grid item container spacing={8} alignItems="center" className={classes.innerContainer}>
         <Grid item>
-            <img src={Edit} className={classes.imageStyle} />
+            <img src={Delete} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
                 Add Payslip Manually
             </Typography>

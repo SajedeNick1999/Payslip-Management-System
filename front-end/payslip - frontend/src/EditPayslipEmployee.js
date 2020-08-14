@@ -4,7 +4,7 @@ import axios from 'axios';
 import {Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
-import Edit from './images/Edit.png';
+import Edit from './images/EditPayslip.png';
 import Green from '@material-ui/core/colors/green';
 import Background from './images/Login_Background.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
@@ -108,11 +108,20 @@ const EditPayslipEmployee = () => {
 
     const {state,setState,handleChange} = useFormState(payslip);
 
+    const [error, setError] = useState("");
+    const [isSubmitValid, setIsSubmitValid] = useState(true);
+
     const handleClose =() => {
       setshowConfirmModal(false);
     }
     const handleOpen = () => {
-      setshowConfirmModal(true);
+      fields.map((field,index)=> {
+        if(!state[index]){
+         setError("All fields are required");
+         setIsSubmitValid(false);
+        }
+       });
+       setshowConfirmModal(true);
     }
 
     const handleCloseStatus =() => {
@@ -162,6 +171,7 @@ const EditPayslipEmployee = () => {
       },[payslip])
 
      const handleSubmit = () => {
+      if(isSubmitValid){
        const jsonMessage = {
          id: id,
          token: token,
@@ -186,6 +196,10 @@ const EditPayslipEmployee = () => {
         handleCloseStatus();
         navigate('/dashboard/payslip/');
       },3000);
+    }
+    else{
+      handleClose();
+    }
     }
 
     const renderTextFields = () => {
@@ -257,6 +271,11 @@ const EditPayslipEmployee = () => {
                </Grid>   
                </Card>
                <Grid container spacing={3} justify="center">
+               <Grid item container>
+                  <Typography variant="body1" color="error">
+                      {error}
+                  </Typography>
+                </Grid>
                  <Grid item>
                  <Button color="primary" variant="contained" onClick={handleOpen}>
                       Confirm
