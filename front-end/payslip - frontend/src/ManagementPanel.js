@@ -6,7 +6,10 @@ import {makeStyles} from '@material-ui/core/styles';
 import PayIcon from './images/PayslipManagement1.png';
 import Employees from './images/Employees.png';
 import Form from './images/Form.png';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
+import ShowPayslip from './images/showpayslip.png';
+import Report from './images/report.png';
+
 
 const useStyles = makeStyles(theme=>({
     container:{
@@ -14,8 +17,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     cardStyle: {
@@ -28,17 +31,20 @@ const useStyles = makeStyles(theme=>({
             height:500,
           },
           [theme.breakpoints.up('lg')]: {
-            width:380,
-            height:600,
+            width:275,
+            height:400,
           },
         backgroundColor: theme.palette.common.white,
         padding:20,
     },
     imageStyle: {
-        width: 300,
-        height: 400,
+        width: 200,
+        height: 200,
         marginBottom: 60,
     },
+    cardContain:{
+        width: '100%',
+    }
 }))
 
 const ManagementPanel = () => {
@@ -53,7 +59,7 @@ const ManagementPanel = () => {
                     Manager Panel
                 </Typography>
             </Grid>
-        <Grid item container alignItems="center" justify="center" spacing={8}>
+        <Grid item container alignItems="center" justify="flex-end" spacing={4}>
         <Grid item>
         <Card className={classes.cardStyle} elevation={3} align="center">
             <img src={Employees} className={classes.imageStyle} />
@@ -73,10 +79,28 @@ const ManagementPanel = () => {
         </Grid>
 
         <Grid item>
-        <Card className={classes.cardStyle} elevation={3} align="center">
+        <Card className={classes.cardStyle} elevation={3} align="center" onClick={()=>navigate(`/dashboard/form/`)}>
             <img src={Form} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
                 Form Management
+            </Typography>
+        </Card>
+        </Grid>
+
+        <Grid item>
+        <Card className={classes.cardStyle} elevation={3} align="center">
+            <img src={ShowPayslip} className={classes.imageStyle} />
+            <Typography variant="h4" color="textPrimary" align="center">
+                Show Payslip
+            </Typography>
+        </Card>
+        </Grid>
+
+        <Grid item>
+        <Card className={classes.cardStyle} elevation={3} align="center">
+            <img src={Report} className={classes.imageStyle} />
+            <Typography variant="h4" color="textPrimary" align="center">
+                Payslip Report
             </Typography>
         </Card>
         </Grid>
