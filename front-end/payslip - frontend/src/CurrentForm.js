@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme=>({
         height:540,
       },
     backgroundColor: theme.palette.common.white,
-    padding:20,
+    padding:45,
 },
   listItem:{
     width: '100%',

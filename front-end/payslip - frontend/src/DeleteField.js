@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme=>({
     imageStyle: {
       width: 300,
       height: 400,
-        marginBottom: 60,
+      marginBottom: 60,
     },
     imageCardButtons:{
         width: 100,
@@ -99,6 +99,8 @@ const useStyles = makeStyles(theme=>({
     },
     item:{
         width: "100%",
+        backgroundPositionX: '80%',
+        backgroundPositionY: '20%',
     },
 }))
 
@@ -198,8 +200,8 @@ const DeleteField = () => {
             alignItems="center"
             >
                 
-            <Grid item>
-                <Button 
+            {/* <Grid item> */}
+                <Button className={classes.item}
                 variant="contained"
                 color="primary"
                 onClick={handleOpen}
@@ -207,7 +209,7 @@ const DeleteField = () => {
                 >
                 delete
                 </Button>
-            </Grid>
+            {/* </Grid> */}
 
             </Grid>
 
