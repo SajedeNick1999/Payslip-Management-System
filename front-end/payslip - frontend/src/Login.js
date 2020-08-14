@@ -38,7 +38,7 @@ const Login = () => {
     const [error,setError] = useState("");
 
     const onLoginClick = () => {
-      fetch(`http://127.0.0.1:8000/login/${userName}/${password}/`)
+      fetch(`http://127.0.0.1:8000/login/${userName}/${password}/${company}/`)
       .then(response => {
         return response.json();
       }).then(response=>{
@@ -101,6 +101,16 @@ const Login = () => {
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
         type="password"
+      />
+     </Grid>
+     <Grid item className={classes.item}>
+      <TextField
+        variant="outlined"
+        label="Company"
+        autoFocus
+        fullWidth
+        value={company}
+        onChange={(e)=>setCompany(e.target.value)}
       />
      </Grid>
      <Grid item>
