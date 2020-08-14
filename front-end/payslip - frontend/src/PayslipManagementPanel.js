@@ -130,6 +130,8 @@ const PayslipManagementPanel = () => {
                <Grid container item justify="center" spacing={5}>
                 <Grid item className={classes.griditemTextField}>
                     <TextField
+                      type="number"
+                      pattern="[0-9]{2,4}"
                       variant="outlined"
                       label="Year"
                       required
@@ -142,6 +144,8 @@ const PayslipManagementPanel = () => {
                 </Grid>
                 <Grid item className={classes.griditemTextField}>
                     <TextField
+                      type="number"
+                      pattern="[0-9]{1,2}"
                       variant="outlined"
                       label="Month"
                       required

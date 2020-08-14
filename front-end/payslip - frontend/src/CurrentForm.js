@@ -64,7 +64,7 @@ const CurrentForm = ({isButton,setSelectedVal,setSelectedName, setField}) => {
           }
           
         })
-      },[]);
+      },[fields]);
 
      const handleSelect = (field,index) => {
           setSelectedVal(index);

@@ -121,7 +121,6 @@ const EditField = () => {
 
     const handleCloseStatus =() => {
       setShowStatusModal(false);
-      navigate('/dashboard/form/');
     }
     const handleOpenStatus = () => {
       setShowStatusModal(true);
@@ -143,7 +142,6 @@ const EditField = () => {
       handleOpenStatus();
       setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/form/');
       },3000);
     }
 
