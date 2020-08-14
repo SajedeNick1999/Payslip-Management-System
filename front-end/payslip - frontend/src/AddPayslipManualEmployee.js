@@ -180,7 +180,7 @@ const AddPayslipManualEmployee = () => {
       handleOpenStatus();
       setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/payslip/');
+        navigate(`/dashboard/payslip/addManual/${props.date}/`);
       },3000);
       }
       else {

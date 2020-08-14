@@ -174,7 +174,7 @@ const DeletePayslipEmployee = () => {
       handleOpenStatus();
       setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/payslip/');
+        navigate(`/dashboard/payslip/delete/${props.date}/`);
       },3000);
     }
 

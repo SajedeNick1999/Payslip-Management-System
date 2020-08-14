@@ -132,7 +132,6 @@ const DeleteField = () => {
 
     const handleCloseStatus =() => {
       setShowStatusModal(false);
-      navigate('/dashboard/form/');
     }
     const handleOpenStatus = () => {
       setShowStatusModal(true);
@@ -153,7 +152,6 @@ const DeleteField = () => {
         handleOpenStatus();
         setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/form/');
       },3000);
     }
 
@@ -187,7 +185,12 @@ const DeleteField = () => {
             <Divider orientation="vertical" flexItem/>
             
             <Grid item>
-            <CurrentForm isButton={true} setSelectedVal={setSelectedVal} setSelectedName={setSelectedName}/>
+            <CurrentForm 
+              isButton={true} 
+              setSelectedVal={setSelectedVal} 
+              setSelectedName={setSelectedName}
+              setField={()=>{}}
+              />
             </Grid>
    
             <Grid item

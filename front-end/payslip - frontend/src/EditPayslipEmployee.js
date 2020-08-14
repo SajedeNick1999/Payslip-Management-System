@@ -198,7 +198,7 @@ const EditPayslipEmployee = () => {
       handleOpenStatus();
       setTimeout(()=>{
         handleCloseStatus();
-        navigate('/dashboard/payslip/');
+        navigate(`/dashboard/payslip/edit/${props.date}/`);
       },3000);
     }
     else{

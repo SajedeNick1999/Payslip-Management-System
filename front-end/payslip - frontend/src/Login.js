@@ -107,7 +107,6 @@ const Login = () => {
       <TextField
         variant="outlined"
         label="Company"
-        autoFocus
         fullWidth
         value={company}
         onChange={(e)=>setCompany(e.target.value)}

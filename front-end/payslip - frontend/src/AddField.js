@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useCallback} from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import {Button, Grid, Card, Typography, Divider,ListItemAvatar, TextField,Avatar,List,ListItem} from '@material-ui/core';
 import Drawer from './Drawer';
@@ -90,7 +90,6 @@ const AddField = () => {
       });
     },[])
 
-
     const handleClose =() => {
       setshowConfirmModal(false);
     }
@@ -106,13 +105,11 @@ const AddField = () => {
 
     const handleCloseStatus =() => {
       setShowStatusModal(false);
-      navigate('/dashboard/form/');
     }
     const handleOpenStatus = () => {
       setShowStatusModal(true);
     }
 
-      
     const onAddClick = () => {
         if(isSubmitValid){
         fetch(`http://127.0.0.1:8000/addfield/${fieldName}/${type}/${token}/${id}/`)
@@ -125,7 +122,6 @@ const AddField = () => {
           handleOpenStatus();
           setTimeout(()=>{
           handleCloseStatus();
-          navigate('/dashboard/form/');
         },3000);
       }
       else{
