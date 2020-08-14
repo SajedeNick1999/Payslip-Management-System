@@ -100,6 +100,7 @@ const Login = () => {
         fullWidth
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
+        type="password"
       />
      </Grid>
      <Grid item>

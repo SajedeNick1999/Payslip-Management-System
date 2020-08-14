@@ -120,6 +120,10 @@ const EditPayslipEmployee = () => {
          setError("All fields are required");
          setIsSubmitValid(false);
         }
+        if((field.type === "1" || field.type === "3") && state[index] && !/^\d*(\.\d+)?$/.test(state[index])){
+          setError(`Type of ${field.name} is invalid`);
+          setIsSubmitValid(false);
+        }
        });
        setshowConfirmModal(true);
     }

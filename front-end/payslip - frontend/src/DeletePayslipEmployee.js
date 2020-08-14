@@ -213,7 +213,7 @@ const DeletePayslipEmployee = () => {
         <StatusModal
             onClose={handleCloseStatus} 
             open={showStatusModal} 
-            content={status===200 ? "Editing was successfull" : "Editing has Failed"} 
+            content={status===200 ? "Deleting was successfull" : "Deleting has Failed"} 
             status={status}
         />
         <Grid container alignItems="center" justify="center" className={classes.container}>
