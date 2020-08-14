@@ -37,3 +37,4 @@ urlpatterns = [
     path('editpayslip/',EditPayslip_view,name="EditPayslip"),
     path('hello/',hello_view,name="hello"),
 ]
+
