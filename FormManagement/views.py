@@ -9,7 +9,7 @@ def addfield_view(request,name,type,token,id):
 	if manager == None:
 		return JsonResponse({'ACK':0,'status':404}) # user not found
 	elif manager.Token != token:
-		return JsonResponse({'ACK':0,'status':403}) # user is not authorized 
+		return JsonResponse({'ACK':0,'status':403}) # user is not authorized
 	else:
 		form = Form.objects.filter(CompanyID=manager.CompanyID).first()
 		if form == None:
@@ -24,7 +24,7 @@ def editfield_view(request,name,index,token,id):
 	if manager == None:
 		return JsonResponse({'ACK':0,'status':404}) # user not found
 	elif manager.Token != token:
-		return JsonResponse({'ACK':0,'status':403}) # user is not authorized 
+		return JsonResponse({'ACK':0,'status':403}) # user is not authorized
 	else:
 		form = Form.objects.filter(CompanyID=manager.CompanyID).first()
 		if form == None:
@@ -39,7 +39,7 @@ def deletefield_view(request,index,token,id):
 	if manager == None:
 		return JsonResponse({'ACK':0,'status':404}) # user not found
 	elif manager.Token != token:
-		return JsonResponse({'ACK':0,'status':403}) # user is not authorized 
+		return JsonResponse({'ACK':0,'status':403}) # user is not authorized
 	else:
 		form = Form.objects.filter(CompanyID=manager.CompanyID).first()
 		if form == None:
@@ -54,7 +54,7 @@ def showform_view(request,token,id):
 	if manager == None:
 		return JsonResponse({'ACK':0,'status':404}) # user not found
 	elif manager.Token != token:
-		return JsonResponse({'ACK':0,'status':403}) # user is not authorized 
+		return JsonResponse({'ACK':0,'status':403}) # user is not authorized
 	else:
 		form = Form.objects.filter(CompanyID=manager.CompanyID).first()
 		if form == None:
@@ -64,8 +64,9 @@ def showform_view(request,token,id):
 			output = {'status':200}
 			i = 0
 			output['count'] = len(formlist)
+			output['fields']={}
 			for field in formlist:
-				output[str(i)] = {
+				output['fields'][str(i)] = {
 					'name':field[0],
 					'type':field[1]
 		        	}

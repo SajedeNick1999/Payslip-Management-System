@@ -19,8 +19,9 @@ def EmployeeList_view(request,token,id):
         i=0
         data['count']=len(employees)
         data['status']=200
+        data['employees']={}
         for emp in employees:
-            data[str(i)]={
+            data['employees'][str(i)]={
                 'Name':emp.Name,
                 'LastName':emp.LastName,
                 'PersonnelCode':emp.PersonnelCode
@@ -47,20 +48,32 @@ def ShowPayslip_view(request,employeeID,date,token,id):
         return JsonResponse({'ACK':0,'status':403}) # user is not authorized
     else:
         emp=Employee.objects.get(ID=employeeID)
+        payslip=Payslip.objects.get(EmployeeID=employeeID,Date=date)
         data={
-            'PayslipID':Payslip.objects.get(EmployeeID=employeeID,Date=date).PayslipID,
-            'Data':emp.Employee_GetPayslip(),
+            'PayslipID':payslip.PayslipID,
+            'Data':payslip.Data,
             'status':200
         }
         return JsonResponse(data)
 
 
 
-def GetId_view (request,name):
-    emp=Employee.objects.get(Name=name)
-    data={
-        'id':emp.ID
-    }
+def Getemployeeinfo_view (request,personnelCode,token,id):
+    manager=Manager.objects.get(EmployeeID=Employee.objects.get(ID=id))
+    if manager == None:
+        return JsonResponse({'ACK':0,'status':404}) # user not found
+    elif manager.EmployeeID.Token != token:
+        return JsonResponse({'ACK':0,'status':403}) # user is not authorized
+    else:
+        emp=Employee.objects.get(PersonnelCode=personnelCode)
+        data={
+            'id':emp.ID,
+            'Name':emp.Name,
+            'LastName':emp.LastName,
+            'PersonnelCode':emp.PersonnelCode,
+            'ACK':1,
+            'status':200
+        }
     return JsonResponse(data)
 
 def AddPayslipManual_view(request):
@@ -71,8 +84,12 @@ def AddPayslipManual_view(request):
     elif manager.EmployeeID.Token != obj['token']:
         return JsonResponse({'ACK':0,'status':403}) # user is not authorized
     else:
-        manager.Manager_AddPayslipManual(obj['EmployeeID'],obj['Date'],obj['JsonData'])
-        return JsonResponse({'ACK':1,'status':200})
+        try:
+            payslip=Payslip.objects.get(EmployeeID=obj['EmployeeID'],Date=obj['Date'])
+            return JsonResponse({'ACK':0,'status':402})
+        except Payslip.DoesNotExist:
+            manager.Manager_AddPayslipManual(obj['EmployeeID'],obj['Date'],obj['JsonData'])
+            return JsonResponse({'ACK':1,'status':200})
 
 def EditPayslip_view(request):
     obj=request.GET.dict()

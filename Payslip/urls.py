@@ -16,14 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from CompanyManagement.views import CompanyAdd_view,hello_view
-from ManagerManagement.views import EmployeeList_view,DeletePayslip_view,ShowPayslip_view,AddPayslipManual_view,EditPayslip_view,GetId_view
+from ManagerManagement.views import EmployeeList_view,DeletePayslip_view,ShowPayslip_view,AddPayslipManual_view,EditPayslip_view,Getemployeeinfo_view
 from FormManagement.views import addfield_view,editfield_view,deletefield_view,showform_view
 from EmployeeManagement.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('employeelist/<str:token>/<uuid:id>/', EmployeeList_view,name='EmployeeList'),
-    path('getid/<str:name>/',GetId_view,name='GetId'),
+    path('getemployeeinfo/<int:personnelCode>/<str:token>/<uuid:id>/',Getemployeeinfo_view,name='Getemployeeinfo'),
     path('deletepayslip/<uuid:payslipID>/<str:token>/<uuid:id>/',DeletePayslip_view,name='DeletePayslip'),
     path('showpayslip/<uuid:employeeID>/<str:date>/<str:token>/<uuid:id>/',ShowPayslip_view,name='ShowPayslip'),
     path('getcompany/<str:name>/',CompanyAdd_view,name='CompanyAdd'),
