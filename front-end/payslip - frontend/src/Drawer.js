@@ -18,10 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
 import AccountMultiple from 'mdi-material-ui/AccountMultiple';
 import AccountMultiplePlus from 'mdi-material-ui/AccountMultiplePlus';
-import FilePlus from 'mdi-material-ui/FilePlus';
+import FilePlus from 'mdi-material-ui/FilePlus';                                                                                  
 import PlusBoxMultiple from 'mdi-material-ui/PlusBoxMultiple';
 import FormSelect from 'mdi-material-ui/FormSelect';
-
+// import { Navigate } from 'react-router';
+// import { useNavigation } from '@react-navigation/native';
+import { useNavigate, Redirect, useParams } from 'react-router-dom';                                                                                                                                                                                                                                                
 
 const drawerWidth = 300;
 
@@ -87,10 +89,14 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
+  // const navigation = useNavigation();
+
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -144,7 +150,7 @@ export default function MiniDrawer() {
               <ListItemIcon>
                 <FormSelect className={classes.icons}/>
               </ListItemIcon>
-              <ListItemText className={classes.listItemText} primary="Format Management" />
+              <ListItemText className={classes.listItemText} primary="Format Management"/>
             </ListItem>
 
         </List>

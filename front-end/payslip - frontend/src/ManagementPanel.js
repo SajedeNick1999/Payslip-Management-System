@@ -73,7 +73,7 @@ const ManagementPanel = () => {
         </Grid>
 
         <Grid item>
-        <Card className={classes.cardStyle} elevation={3} align="center">
+        <Card className={classes.cardStyle} elevation={3} align="center" onClick={()=>navigate(`/dashboard/form/`)}>
             <img src={Form} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
                 Form Management
