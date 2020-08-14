@@ -154,11 +154,6 @@ const PayslipManagementPanel = () => {
                       />
                 </Grid>
             </Grid>
-            <Grid item>
-                <Typography variant="body2" color="error">
-                    {error}
-                </Typography>
-            </Grid>
             <Grid container item justify="space-around" spacing={5}>
             <Grid item alignItems="center">
         <Card className={classes.cardButtons} elevation={3} align="center" onClick={() =>handleNavigate(`/dashboard/payslip/add/${year}:${month}`)}>
@@ -186,7 +181,13 @@ const PayslipManagementPanel = () => {
         </Card>
         </Grid>
             </Grid>
+            <Grid item>
+                <Typography variant="body2" color="error">
+                    {error}
+                </Typography>
+            </Grid>
         </Grid>
+        
 
         </Grid>
         </Grid>
