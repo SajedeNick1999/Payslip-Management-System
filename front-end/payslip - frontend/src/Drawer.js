@@ -18,10 +18,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
 import AccountMultiple from 'mdi-material-ui/AccountMultiple';
 import AccountMultiplePlus from 'mdi-material-ui/AccountMultiplePlus';
-import FilePlus from 'mdi-material-ui/FilePlus';
+import FilePlus from 'mdi-material-ui/FilePlus';                                                                                  
 import PlusBoxMultiple from 'mdi-material-ui/PlusBoxMultiple';
 import FormSelect from 'mdi-material-ui/FormSelect';
+import ChartBar from 'mdi-material-ui/ChartBar';
+import ShowPayslipIcon from 'mdi-material-ui/CreditCardOutline'
 
+// import { Navigate } from 'react-router';
+//import { useNavigation } from '@react-navigation/native';
+import { useNavigate, Redirect, useParams } from 'react-router-dom';                                                                                                                                                                                                                                                
+ 
 
 const drawerWidth = 300;
 
@@ -87,10 +93,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate =useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -119,11 +127,24 @@ export default function MiniDrawer() {
       >
         <List>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/')}>
               <ListItemIcon>
                 <AccountCircle className={classes.icons}/>
               </ListItemIcon>
-              <ListItemText className={classes.listItemText} primary="Your Panel" />
+              <ListItemText className={classes.listItemText} primary="Your Panel" /> 
+            </ListItem>
+
+            <ListItem button>
+            <ListItemIcon>
+                <ShowPayslipIcon className={classes.icons}/>
+              </ListItemIcon>
+              <ListItemText className={classes.listItemText} primary="Visit Payslip" />
+            </ListItem>
+            <ListItem button>
+            <ListItemIcon>
+                <ChartBar className={classes.icons}/>
+              </ListItemIcon>
+              <ListItemText className={classes.listItemText} primary="Payslip Report" />
             </ListItem>
 
             <ListItem button>
@@ -133,18 +154,18 @@ export default function MiniDrawer() {
               <ListItemText className={classes.listItemText} primary="Employee Management" />
             </ListItem>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/payslip/')}>
               <ListItemIcon>
                 <FilePlus className={classes.icons}/>
               </ListItemIcon>
               <ListItemText className={classes.listItemText} primary="Payslip Management" />
             </ListItem>
 
-            <ListItem button>
+            <ListItem button onClick={()=> navigate('/dashboard/form/')}>
               <ListItemIcon>
                 <FormSelect className={classes.icons}/>
               </ListItemIcon>
-              <ListItemText className={classes.listItemText} primary="Format Management" />
+              <ListItemText className={classes.listItemText} primary="Form Management"/>
             </ListItem>
 
         </List>
