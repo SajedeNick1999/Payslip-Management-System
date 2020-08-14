@@ -9,6 +9,10 @@ import ManagementPanel from './ManagementPanel';
 import PayslipManagementPanel from './PayslipManagementPanel';
 import AddPayslip from './AddPayslip';
 import AddPayslipManual from './AddPayslipManual';
+import FormManagementPanel from './FormManagementPanel';
+import AddField from './AddField';
+import EditField from './EditField';
+import DeleteField from './DeleteField';
 import AddPayslipManualEmployee from './AddPayslipManualEmployee';
 import EditPayslip from './EditPayslip';
 import EditPayslipEmployee from './EditPayslipEmployee';
@@ -32,6 +36,11 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard/" element={<ManagementPanel />} />
         <Route path="/dashboard/payslip/" element={<PayslipManagementPanel />} />
+        <Route path="/dashboard/form/" element={<FormManagementPanel />} />
+        <Route path="/dashboard/form/add/" element={<AddField />} />
+        <Route path="/dashboard/form/edit/" element={<EditField />} />
+        <Route path="/dashboard/form/delete/" element={<DeleteField />} />
+
         <Route path="/dashboard/payslip/add/:date" element={<AddPayslip />} />
         <Route path="/dashboard/payslip/addManual/:date/" element={<AddPayslipManual />} />
         <Route path="/dashboard/payslip/addManual/form/:date/:id/" element={<AddPayslipManualEmployee />} />
@@ -43,7 +52,7 @@ const App = () => {
       </Routes>
       </BrowserRouter>
     </ThemeProvider>
-  )
+  )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 }
 
 export default App;
