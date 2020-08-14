@@ -2,36 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from 'mdi-material-ui/Menu';
-import ChevronLeftIcon from 'mdi-material-ui/ChevronLeft';
-import ChevronRightIcon from 'mdi-material-ui/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import {Card,List,ListItem,ListItemAvatar,ListItemText,Typography, Grid, Avatar, Divider} from '@material-ui/core' 
 import AccountCircle from 'mdi-material-ui/AccountCircle';
-import AccountMultiple from 'mdi-material-ui/AccountMultiple';
-import AccountMultiplePlus from 'mdi-material-ui/AccountMultiplePlus';
-import FilePlus from 'mdi-material-ui/FilePlus';
-import PlusBoxMultiple from 'mdi-material-ui/PlusBoxMultiple';
-import FormSelect from 'mdi-material-ui/FormSelect';
+
 
 
 const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
-  
-
+  cardButtons:{
+    [theme.breakpoints.down('sm')]: {
+        width: 700,
+        height:500,
+      },
+      [theme.breakpoints.up('md')]: {
+        width: 700,
+        height:500,
+      },
+      [theme.breakpoints.up('lg')]: {
+        width: 700,
+        height:500,
+      },
+      backgroundColor: theme.palette.common.white,
+      padding:20,
+      borderRadius:20,
+  },
+  listItem:{
+    width: '100%',
+  }
 }));
 
-const EmployeeList = () => {
+const EmployeeList = ({url}) => {
+  const props = useParams();
   const classes = useStyles();
   const [employees,setEmployees] = useState([]);
   const navigate = useNavigate();
@@ -44,16 +46,42 @@ const EmployeeList = () => {
       return response.json();
     }).then(response=>{
       if(response.status === 200){
-        setEmployees(response);
-      }
-      
+        const employeeArray = Object.keys(response.employees).map((key) => response.employees[key]);
+        setEmployees(employeeArray);
+      }    
     })
   },[]);
-
   return (
+    <>
+        <Card className={classes.cardButtons} elevation={3} align="center">
+        <Typography variant="h4" color="textPrimary" align="center">
+            Employee List
+        </Typography>
+        <Grid container >
+          <Grid item className={classes.listItem}>
         <List>
-            {}
+            {
+              employees.map(employee => (
+                <>
+                <ListItem button onClick={()=> navigate(`${url}${props.date}/${employee.PersonnelCode}/`)}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <AccountCircle />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText 
+                    primary={<Typography variant="h5">{`${employee.Name} ${employee.LastName}`}</Typography>}  
+                    secondary={employee.PersonnelCode} />
+                </ListItem>
+                <Divider />
+                </>
+              ))
+            }
         </List>
+          </Grid>
+        </Grid>
+        </Card>
+    </>
   );
 }
 export default EmployeeList;
