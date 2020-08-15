@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme=>({
     icons:{
     color:theme.palette.common.black,
     fontSize: 50,
-    }
+    },
 }))
 
 const AddPayslip = () => {
@@ -103,16 +103,23 @@ const AddPayslip = () => {
         <Grid item>
             <img src={PayIcon} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Add Payslip
+                Payslip Addition
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid container item justify="space-around"className={classes.textFieldContainer} alignItems="center">
+            <Grid item container>
+            <Box clone margin="20px !important">
+                <Typography variant="h5" color="primary" marginBottom={4}>
+                    {`Selected date : ${props.date.replace(':','.')}`}
+                </Typography>
+            </Box>
+            </Grid>
             <Grid item alignItems="center">
         <Card className={classes.cardButtons} elevation={3} align="center" onClick={() => navigate(`/dashboard/payslip/addManual/${props.date}/`)}>
             <img src={AddManual} className={`${classes.imageCardButtons} ${classes.addCard}`} />
             <Typography variant="h4" color="primary" align="center">
-                Add Manual
+                Manual Addition
             </Typography>
         </Card>
         </Grid>
@@ -120,7 +127,7 @@ const AddPayslip = () => {
         <Card className={classes.cardButtons} elevation={3} align="center">  
             <img src={AddByFile} color="primary" className={classes.imageCardButtons} />
             <Typography variant="h4" color="primary" align="center">
-                Add by File
+                Addition by File
             </Typography>
         </Card>
         </Grid>

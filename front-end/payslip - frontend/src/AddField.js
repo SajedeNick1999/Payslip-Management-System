@@ -4,7 +4,7 @@ import {Button, Grid, Card, Typography, Divider,ListItemAvatar, TextField,Avatar
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import AddFieldimg from './images/AddFieldimg.png';
 import MenuItem from '@material-ui/core/MenuItem';
 import CurrentForm from './CurrentForm';
@@ -33,8 +33,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -146,7 +146,7 @@ const AddField = () => {
         <StatusModal
             onClose={handleCloseStatus} 
             open={showStatusModal} 
-            content={status===200 ? "Adding was successfull" : "Adding has Failed"} 
+            content={status===200 ? "Addition was successfull" : "Addition has Failed"} 
             status={status}
         />
 
@@ -155,7 +155,7 @@ const AddField = () => {
                 <Grid item>
                 <img src={AddFieldimg} className={classes.imageStyle} />
                 <Typography variant="h4" color="textPrimary" align="center">
-                    Add Field
+                    Field Addition
                 </Typography>
                 </Grid>
             <Divider orientation="vertical" flexItem/>

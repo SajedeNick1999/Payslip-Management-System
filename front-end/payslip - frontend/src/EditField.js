@@ -6,7 +6,7 @@ import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import EditFieldimg from './images/EditFieldimg.png';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import AccountCircle from 'mdi-material-ui/AccountCircle';
 import useFormState from './useFormState'
 import FormField from './FormField';
@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -158,7 +158,7 @@ const EditField = () => {
         <StatusModal
             onClose={handleCloseStatus} 
             open={showStatusModal} 
-            content={status===200 ? "Editing was successfull" : "Editing has Failed"} 
+            content={status===200 ? "Edition was successfull" : "Edition has Failed"} 
             status={status}
         />
         <Grid container alignItems="center" justify="center" className={classes.container}>
@@ -166,7 +166,7 @@ const EditField = () => {
         <Grid item>
             <img src={EditFieldimg} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Edit Field
+                Field Edition
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
