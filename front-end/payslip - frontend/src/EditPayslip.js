@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { useNavigate, Redirect, useParams } from 'react-router-dom';
-import {Button, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
+import {Box, Grid, Card, Typography, Divider, TextField} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Edit from './images/EditPayslip.png';
@@ -97,11 +97,16 @@ const EditPayslip = () => {
         <Grid item>
             <img src={Edit} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Edit Payslip
+                Payslip Edition
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid item>
+        <Box clone margin="20px !important">
+                <Typography variant="h5" color="primary" marginBottom={4}>
+                    {`Selected date : ${props.date.replace(':','.')}`}
+                </Typography>
+            </Box>
             <EmployeeList url="/dashboard/payslip/edit/" />
         </Grid>
         </Grid>

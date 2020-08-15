@@ -5,7 +5,7 @@ import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import PayIcon from './images/PayslipManagement1.png';
 import Green from '@material-ui/core/colors/green';
-import Background from './images/Login_Background.png';
+import Background from './images/Picture2.png';
 import DeleteFieldimg from './images/DeleteFieldimg.png';
 import AddSign from './images/AddSign.png';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme=>({
       height: '100vh', 
       overflowX: 'hidden',
       backgroundImage: `url(${Background})`,
-      backgroundPositionX: '70%',
-      backgroundPositionY: '20%',
+      backgroundPositionX: '100%',
+      backgroundPositionY: '100%',
 
     },
     innerContainer:{
@@ -170,7 +170,7 @@ const DeleteField = () => {
         <StatusModal
             onClose={handleCloseStatus} 
             open={showStatusModal} 
-            content={status===200 ? "Deleting was successfull" : "Deleting has Failed"} 
+            content={status===200 ? "Deletion was successfull" : "Deletion has Failed"} 
             status={status}
         />
 
@@ -179,7 +179,7 @@ const DeleteField = () => {
                 <Grid item>
                 <img src={DeleteFieldimg} className={classes.imageStyle} />
                 <Typography variant="h4" color="textPrimary" align="center">
-                    Delete Field
+                    Field Deletion
                 </Typography>
                 </Grid>
             <Divider orientation="vertical" flexItem/>

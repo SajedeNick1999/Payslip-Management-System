@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import {Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
+import {Box,Button, Grid, Card, Typography, Divider, TextField, Avatar,CardHeader} from '@material-ui/core';
 import Drawer from './Drawer';
 import {makeStyles} from '@material-ui/core/styles';
 import Delete from './images/DeletePayslip.png';
@@ -213,7 +213,7 @@ const DeletePayslipEmployee = () => {
         <StatusModal
             onClose={handleCloseStatus} 
             open={showStatusModal} 
-            content={status===200 ? "Deleting was successfull" : "Deleting has Failed"} 
+            content={status===200 ? "Deletion was successfull" : "Deletion has Failed"} 
             status={status}
         />
         <Grid container alignItems="center" justify="center" className={classes.container}>
@@ -221,11 +221,16 @@ const DeletePayslipEmployee = () => {
         <Grid item>
             <img src={Delete} className={classes.imageStyle} />
             <Typography variant="h4" color="textPrimary" align="center">
-                Delete Payslip Manually
+                Payslip Deletion
             </Typography>
         </Grid>
         <Divider orientation="vertical" flexItem/>
             <Grid  item >
+            <Box clone margin="20px !important">
+                <Typography variant="h5" color="primary" marginBottom={4}>
+                    {`Selected date : ${props.date.replace(':','.')}`}
+                </Typography>
+            </Box>
              <Card className={classes.cardButtons} elevation={3}>
              <CardHeader
                   avatar={
