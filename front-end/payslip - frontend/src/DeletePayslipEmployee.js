@@ -207,7 +207,7 @@ const DeletePayslipEmployee = () => {
           onClose={handleClose} 
           open={showConfirmModal}
           handleSubmit={handleSubmit} 
-          content="Are you sure you want to edit?" 
+          content="Are you sure you want to delete?" 
 
         />
         <StatusModal

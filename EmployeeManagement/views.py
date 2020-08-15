@@ -21,3 +21,4 @@ def login_view(request,username,password,company):
 			return JsonResponse({'Token':employee.Token,'ID':employee.ID,'status':200,'isManager':isManager})
 		else:
 			return JsonResponse({'Token':'-1','ID':'-1','status':404,'isManager':'-1'}) # user not found in that company
+
