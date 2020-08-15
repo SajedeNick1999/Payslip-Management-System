@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme=>({
           },
           [theme.breakpoints.up('lg')]: {
             width:200,
-            height:250,
+            height:300,
           },
           backgroundColor: theme.palette.common.white,
           padding:20,
